@@ -8,3 +8,12 @@
 * **Décisions prises :** 
 * **Points à reprendre à la séance suivante :** 
 * **Usage de l'IA :** Questionnement sur le commencement du projet et l'organisation
+
+## Séance 2 - 28/05
+
+* **Objectif de la séance :** réussir à afficher les premières données de la base MariaDB.
+* **Travail réalisé :** 
+* **Difficultés rencontrées :** 
+* **Décisions prises :** 
+* **Points à reprendre à la séance suivante :** 
+* **Usage de l'IA :**
