@@ -23,6 +23,7 @@ class Game extends CI_Controller {
         } else {
             $data['games'] = $this->game_model->get_games_filtered($search, $sort_by, $sort_order);
         }
+
         $data['genres'] = $this->game_model->get_genres();
         $data['categories'] = $this->game_model->get_categories();
         
@@ -31,6 +32,16 @@ class Game extends CI_Controller {
         $data['current_order'] = $sort_order;
 
         $this->load->view('game/test', $data);
+    }
+
+    public function detail($id) {
+        $data['game'] = $this->game_model->get_game_id($id);
+        
+        if (empty($data['game'])) {
+            show_404();
+        }
+
+        $this->load->view('game/details', $data);
     }
 
     public function delete($id = NULL) {

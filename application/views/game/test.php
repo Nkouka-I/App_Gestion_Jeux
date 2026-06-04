@@ -10,6 +10,7 @@
     <form method="GET" action="<?php echo site_url('game/index'); ?>">
         <input type="text" name="search" value="<?php echo $current_search; ?>" placeholder="Rechercher un jeu...">
         <button type="submit">Rechercher</button>
+        <a href="<?php echo site_url('game/index'); ?>">Réinitialiser</a>
     </form>
     <br>
     <p>
@@ -37,7 +38,7 @@
     <ul>
         <?php foreach ($games as $game): ?>
             <li>
-                <strong><?php echo $game['name']; ?></strong> 
+                <strong><a href="<?php echo site_url('game/detail/' . $game['id']); ?>"><strong><?php echo $game['name']; ?></strong></a></strong> 
                 (<?php echo $game['releaseYear']; ?>)          
                 <br>
             </li>

@@ -62,4 +62,10 @@ class Game_model extends CI_Model {
 	    $query = $this->db->query($sql);
 	    return $query->result_array();
 	}
+
+	public function get_game_id($id) {
+	    $sql = "SELECT * FROM game WHERE id = ".$id;
+	    $query = $this->db->query($sql);
+	    return $query->row_array(); 
+	}
 }
