@@ -12,4 +12,21 @@ class Game_model extends CI_Model {
     	$query = $this->db->query($sql); 
     	return $query->result_array();
 	}
+
+	public function get_games_filtered($search = null, $sort_by = 'name', $sort_order = 'ASC') 
+	{
+	    if (!empty($search)) {
+	        $sql = "SELECT * 
+	        		FROM game 
+	        		WHERE name LIKE '%" .$search. "%' ORDER BY " .$sort_by. " " .$sort_order;
+	        $query = $this->db->query($sql);
+	    } else {
+	        $sql = "SELECT * 
+	        		FROM game 
+	        		ORDER BY " .$sort_by. " " .$sort_order;
+	        $query = $this->db->query($sql);
+	    }
+	    
+	    return $query->result_array();
+	}
 }
