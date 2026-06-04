@@ -8,14 +8,30 @@
     <h1>Liste des jeux</h1>
 
     <form method="GET" action="<?php echo site_url('game/index'); ?>">
-        <input type="text" name="search" value="<?php echo $current_search; ?>">
+        <input type="text" name="search" value="<?php echo $current_search; ?>" placeholder="Rechercher un jeu...">
         <button type="submit">Rechercher</button>
     </form>
-
+    <br>
     <p>
         Trier par : 
-        <a href="<?php echo site_url('game/index?sort=name&order=ASC&search=' . $current_search); ?>">Nom (A-Z)</a> | 
-        <a href="<?php echo site_url('game/index?sort=releaseYear&order=DESC&search=' . $current_search); ?>">Année</a>
+        <a href="<?php echo site_url('game/index?sort=name&order=ASC&search='.$current_search); ?>">Nom (A-Z)</a> | 
+        <a href="<?php echo site_url('game/index?sort=releaseYear&order=DESC&search='.$current_search); ?>">Année</a> 
+    </p>
+    <p>
+        <strong>Filtrer par Genre :</strong>
+        <?php foreach ($genres as $genre): ?>
+            <a href="<?php echo site_url('game/index?genre='.$genre['id']); ?>">
+                <?php echo $genre['description']; ?>
+            </a> | 
+        <?php endforeach; ?>
+    </p>
+    <p>
+        <strong>Filtrer par Catégorie :</strong>
+        <?php foreach ($categories as $category): ?>
+            <a href="<?php echo site_url('game/index?category=' . $category['id']); ?>">
+                <?php echo $category['description']; ?> 
+            </a> | 
+        <?php endforeach; ?>
     </p>
 
     <ul>

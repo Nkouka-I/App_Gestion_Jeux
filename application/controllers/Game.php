@@ -13,8 +13,18 @@ class Game extends CI_Controller {
         $search = $this->input->get('search');
         $sort_by = $this->input->get('sort') ? $this->input->get('sort') : 'name';
         $sort_order = $this->input->get('order') ? $this->input->get('order') : 'ASC';
+        $genre_id = $this->input->get('genre');
+        $category_id = $this->input->get('category');
 
-        $data['games'] = $this->game_model->get_games_filtered($search, $sort_by, $sort_order);
+        if (!empty($genre_id)) {
+            $data['games'] = $this->game_model->get_games_genre($genre_id);
+        } elseif (!empty($category_id)) {
+            $data['games'] = $this->game_model->get_games_category($category_id);
+        } else {
+            $data['games'] = $this->game_model->get_games_filtered($search, $sort_by, $sort_order);
+        }
+        $data['genres'] = $this->game_model->get_genres();
+        $data['categories'] = $this->game_model->get_categories();
         
         $data['current_search'] = $search;
         $data['current_sort'] = $sort_by;

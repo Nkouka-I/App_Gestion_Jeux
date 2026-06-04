@@ -29,4 +29,37 @@ class Game_model extends CI_Model {
 	    
 	    return $query->result_array();
 	}
+
+	public function get_games_genre($genre_id)
+	{
+		$sql = "SELECT g.* 
+				FROM game g JOIN game_genre gg ON g.id = gg.gameId
+				WHERE gg.genreId = ".$genre_id;
+
+		$query = $this->db->query($sql);
+    	return $query->result_array();
+	}
+
+	public function get_games_category($category_id) 
+	{
+	    $sql = "SELECT g.* 
+	    		FROM game g JOIN game_category gc ON g.id = gc.gameId 
+	            WHERE gc.categoryId = ".$category_id;
+	            
+	    $query = $this->db->query($sql);
+	    return $query->result_array();
+	}
+
+	public function get_genres() 
+	{
+    	$sql = "SELECT * FROM genre";
+    	$query = $this->db->query($sql);
+	    return $query->result_array();
+	}
+
+	public function get_categories() {
+	    $sql = "SELECT * FROM category";
+	    $query = $this->db->query($sql);
+	    return $query->result_array();
+	}
 }
