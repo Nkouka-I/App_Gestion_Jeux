@@ -52,20 +52,33 @@ class Game_model extends CI_Model {
 
 	public function get_genres() 
 	{
-    	$sql = "SELECT * FROM genre";
+    	$sql = "SELECT * 
+    			FROM genre";
     	$query = $this->db->query($sql);
 	    return $query->result_array();
 	}
 
 	public function get_categories() {
-	    $sql = "SELECT * FROM category";
+	    $sql = "SELECT * 
+	    		FROM category";
 	    $query = $this->db->query($sql);
 	    return $query->result_array();
 	}
 
 	public function get_game_id($id) {
-	    $sql = "SELECT * FROM game WHERE id = ".$id;
+	    $sql = "SELECT * 
+	    		FROM game 
+	    		WHERE id = ".$id;
 	    $query = $this->db->query($sql);
 	    return $query->row_array(); 
+	}
+
+	public function get_game_id_dev($id) {
+	    $sql = "SELECT g.*, d.name AS developer_name
+	    		FROM game g JOIN developer d ON g.developerId = d.id
+	    		WHERE g.id = ".$id;
+
+	    $query = $this->db->query($sql);
+	    return $query->row_array();
 	}
 }

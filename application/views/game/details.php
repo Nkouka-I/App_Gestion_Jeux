@@ -11,11 +11,12 @@
     <?php if ($game['metacritic'] !== NULL): ?>
         <p><strong>Note Metacritic :</strong> <?php echo $game['metacritic']; ?>/100</p>
     <?php endif; ?>
+    <p><strong>Développeur :</strong> <?php echo $game['developer_name']; ?></p>
 
-    <h3>Description du jeu :</h3>
+    <p><strong>Description du jeu :</strong></p>
     <p><?php echo $game['shortDescription']; ?></p>
 
-    <h3>Compatibilité :</h3>
+    <p><strong>Compatibilité :</strong></p>
     <ul>
         <li>Windows : <?php echo ($game['windows']) ? 'Oui' : 'Non'; ?></li>
         <li>Linux : <?php echo ($game['linux']) ? 'Oui' : 'Non'; ?></li>
