@@ -20,8 +20,18 @@
 
 ## Séance 3 - 
 
-* **Objectif de la séance :** implementation fonction de tri et de consultation
-* **Travail réalisé :** 
-* **Difficultés rencontrées :** 
+* **Objectif de la séance :** implementation fonction de tri et de consultation  
+* **Travail réalisé :** implementation fonction de tri et de consultation des inforamtions d'un jeu. 
+* **Difficultés rencontrées :** gestion base de donnée MariaDB, 
 * **Décisions prises :** 
-* **Points à reprendre à l
+* **Points à reprendre à la séance suivante :** ajouts image du jeux dans pages d'information du jeu, questionnement sur les données sql à recoltée
+* **Usage de l'IA :** gestion des bug, generation de pages html sans implementation php, aide a l'armonisation du code
+
+## Séance 4 - 
+
+* **Objectif de la séance :** implementation fonction de suppression, création et modification des jeux de la base
+* **Travail réalisé :** 
+* **Difficultés rencontrées :**  
+* **Décisions prises :** 
+* **Points à reprendre à la séance suivante :** 
+* **Usage de l'IA :** 

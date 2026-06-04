@@ -13,8 +13,7 @@
     <?php endif; ?>
     <p><strong>Développeur :</strong> <?php echo $game['developer_name']; ?></p>
 
-    <p><strong>Description du jeu :</strong></p>
-    <p><?php echo $game['shortDescription']; ?></p>
+    <p><strong>Description du jeu :</strong><?php echo $game['shortDescription']; ?></p>
 
     <p><strong>Compatibilité :</strong></p>
     <ul>
