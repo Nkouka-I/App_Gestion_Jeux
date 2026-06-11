@@ -7,6 +7,12 @@
 
     <h1>Liste des jeux</h1>
 
+    <p>
+        <a href="<?php echo site_url('game/add'); ?>">
+            ➕ Ajouter un nouveau jeu
+        </a>
+    </p>
+
     <form method="GET" action="<?php echo site_url('game/index'); ?>">
         <input type="text" name="search" value="<?php echo $current_search; ?>" placeholder="Rechercher un jeu...">
         <button type="submit">Rechercher</button>
@@ -38,8 +44,14 @@
     <ul>
         <?php foreach ($games as $game): ?>
             <li>
-                <strong><a href="<?php echo site_url('game/detail/' . $game['id']); ?>"><strong><?php echo $game['name']; ?></strong></a></strong> 
+                <strong><a href="<?php echo site_url('game/detail/' . $game['id']); ?>"><?php echo $game['name']; ?></a></strong> 
                 (<?php echo $game['releaseYear']; ?>)          
+                
+                <span style="margin-left: 15px;">
+                    <a href="<?php echo site_url('game/edit/' . $game['id']); ?>">✏️ Modifier</a>
+                    | 
+                    <a href="<?php echo site_url('game/delete/' . $game['id']); ?>" onclick="return confirm('Supprimer définitivement ce jeu ?');">❌ Supprimer</a>
+                </span>
                 <br>
             </li>
         <?php endforeach; ?>

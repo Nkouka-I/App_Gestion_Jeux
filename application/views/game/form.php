@@ -56,7 +56,7 @@
     </form>
 
     <hr>
-    <a href="<?php echo site_url('game/index'); ?>">Retour à la liste</a>
+    <a href="<?php echo site_url('game/index'); ?>">Retour à la liste des jeux</a>
 
 </body>
 </html>
