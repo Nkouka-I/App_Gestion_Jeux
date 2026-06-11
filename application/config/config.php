@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = '/~nkouka/sae_r301_gr4/';
+$config['base_url'] = '/~nkouka/sae_r301_gr34/';
 
 /*
 |--------------------------------------------------------------------------

@@ -35,7 +35,7 @@ class Game extends CI_Controller {
     }
 
     public function detail($id) {
-        $data['game'] = $this->game_model->get_game_id_dev($id);
+        $data['game'] = $this->game_model->get_game_id_dev_poster($id);
         
         if (empty($data['game'])) {
             show_404();

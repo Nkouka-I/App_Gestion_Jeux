@@ -65,17 +65,9 @@ class Game_model extends CI_Model {
 	    return $query->result_array();
 	}
 
-	public function get_game_id($id) {
-	    $sql = "SELECT * 
-	    		FROM game 
-	    		WHERE id = ".$id;
-	    $query = $this->db->query($sql);
-	    return $query->row_array(); 
-	}
-
-	public function get_game_id_dev($id) {
-	    $sql = "SELECT g.*, d.name AS developer_name
-	    		FROM game g JOIN developer d ON g.developerId = d.id
+	public function get_game_id_dev_poster($id) {
+	    $sql = "SELECT g.*, d.name AS developer_name, p.jpeg AS game_image
+	    		FROM game g JOIN developer d ON g.developerId = d.id LEFT JOIN poster p ON p.id = g.posterId
 	    		WHERE g.id = ".$id;
 
 	    $query = $this->db->query($sql);

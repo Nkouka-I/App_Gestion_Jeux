@@ -6,11 +6,23 @@
 <body>
 
     <h1><?php echo $game['name']; ?></h1>
+
+    <?php if (!empty($game['game_image'])): ?>
+        <div class="game-poster">
+            <img src="data:image/jpeg;base64,<?php echo base64_encode($game['game_image']); ?>" alt="Poster de <?php echo $game['name']; ?>" style="max-width: 300px; height: auto; border-radius: 8px;">
+        </div>
+    <?php else: ?>
+        <p><em>Aucune image disponible pour ce jeu.</em></p>
+    <?php endif; ?>
+
     <p><strong>Année de sortie :</strong> <?php echo $game['releaseYear']; ?></p>
+
     <p><strong>Prix :</strong> <?php echo $game['price']/100; ?> $</p>
+
     <?php if ($game['metacritic'] !== NULL): ?>
         <p><strong>Note Metacritic :</strong> <?php echo $game['metacritic']; ?>/100</p>
     <?php endif; ?>
+    
     <p><strong>Développeur :</strong> <?php echo $game['developer_name']; ?></p>
 
     <p><strong>Description du jeu :</strong><?php echo $game['shortDescription']; ?></p>
