@@ -51,4 +51,59 @@ class Game extends CI_Controller {
         $this->game_model->delete_game($id);
         redirect('game/test');
     }
+
+    public function add() {
+        if ($this->input->post()) {
+            $game_data = array(
+                'name'             => $this->input->post('name'),
+                'releaseYear'      => $this->input->post('releaseYear'),
+                'price'            => $this->input->post('price'),
+                'metacritic'       => $this->input->post('metacritic') ?: NULL,
+                'developerId'      => $this->input->post('developerId'),
+                'shortDescription' => $this->input->post('shortDescription'),
+                'windows'          => $this->input->post('windows') ? 1 : 0,
+                'linux'            => $this->input->post('linux') ? 1 : 0,
+                'mac'              => $this->input->post('mac') ? 1 : 0
+            );
+
+            $this->game_model->insert_game($game_data);
+            redirect('game/index');
+        }
+
+        $data['genres'] = $this->game_model->get_genres();
+        $data['categories'] = $this->game_model->get_categories();
+        $this->load->view('game/form', $data);
+    }
+
+    public function edit($id = NULL) {
+        if ($id === NULL) {
+            show_404();
+        }
+
+        $data['game'] = $this->game_model->get_game_id_dev_poster($id);
+        if (empty($data['game'])) {
+            show_404();
+        }
+
+        if ($this->input->post()) {
+            $game_data = array(
+                'name'             => $this->input->post('name'),
+                'releaseYear'      => $this->input->post('releaseYear'),
+                'price'            => $this->input->post('price'), 
+                'metacritic'       => $this->input->post('metacritic') ?: NULL,
+                'developerId'      => $this->input->post('developerId'),
+                'shortDescription' => $this->input->post('shortDescription'),
+                'windows'          => $this->input->post('windows') ? 1 : 0,
+                'linux'            => $this->input->post('linux') ? 1 : 0,
+                'mac'              => $this->input->post('mac') ? 1 : 0
+            );
+
+            $this->game_model->update_game($id, $game_data);
+            redirect('game/index');
+        }
+
+        $data['genres'] = $this->game_model->get_genres();
+        $data['categories'] = $this->game_model->get_categories();
+        $this->load->view('game/form', $data);
+    }
 }
