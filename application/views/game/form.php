@@ -16,7 +16,7 @@
 
         <p>
             <label for="releaseYear">Année de sortie :</label><br>
-            <input type="number" name="releaseYear" id="releaseYear" value="<?php echo isset($game) ? $game['releaseYear'] : ''; ?>" required>
+            <input type="number" name="releaseYear" id="releaseYear" min="0" max="2026" value="<?php echo isset($game) ? $game['releaseYear'] : ''; ?>" required>
         </p>
 
         <p>
@@ -30,8 +30,15 @@
         </p>
 
         <p>
-            <label for="developerId">ID Développeur (Temporaire) :</label><br>
-            <input type="number" name="developerId" id="developerId" value="<?php echo isset($game) ? $game['developerId'] : ''; ?>" required>
+            <label for="developerId">Développeur / Éditeur :</label><br>
+            <select name="developerId" id="developerId" required>
+                <option value="">-- Choisir un développeur --</option>
+                <?php foreach ($developers as $developer): ?>
+                    <option value="<?php echo $developer['id']; ?>" <?php echo (isset($game) && $game['developerId'] == $developer['id']) ? 'selected' : ''; ?>>
+                        <?php echo $developer['name']; ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
         </p>
 
         <p>
