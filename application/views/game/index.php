@@ -48,9 +48,9 @@
                 (<?php echo $game['releaseYear']; ?>)          
                 
                 <span style="margin-left: 15px;">
-                    <a href="<?php echo site_url('game/edit/'.$game['id']); ?>">✏️ Modifier</a>
+                    <a href="<?php echo site_url('game/edit/'.$game['id']); ?>">✏️</a>
                     | 
-                    <a href="<?php echo site_url('game/delete/'.$game['id']); ?>" onclick="return confirm('Supprimer définitivement ce jeu ?');">❌ Supprimer</a>
+                    <a href="<?php echo site_url('game/delete/'.$game['id']); ?>" onclick="return confirm('Supprimer définitivement ce jeu ?');">❌</a>
                 </span>
                 <br>
             </li>

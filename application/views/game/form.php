@@ -7,6 +7,18 @@
 
     <h1><?php echo isset($game) ? "Modifier le jeu : " . $game['name'] : "Ajouter un nouveau jeu"; ?></h1>
 
+        <form action="<?php echo isset($game) ? site_url('game/edit/' . $game['id']) : site_url('game/add'); ?>" method="post" enctype="multipart/form-data">
+
+        <?php if (!isset($game)): ?>
+            <p>
+                <label for="game_image">Poster du jeu (Optionnel, format JPEG) :</label><br>
+                <input type="file" name="game_image" id="game_image" accept="image/jpeg">
+            </p>
+        <?php endif; ?>
+
+        <button type="submit"><?php echo isset($game) ? "Enregistrer les modifications" : "Ajouter le jeu"; ?></button>
+    </form>
+
     <form action="<?php echo isset($game) ? site_url('game/edit/' . $game['id']) : site_url('game/add'); ?>" method="post">
 
         <p>
@@ -21,7 +33,7 @@
 
         <p>
             <label for="price">Prix ($) :</label><br>
-            <input type="number" step="0.01" name="price" id="price" value="<?php echo isset($game) ? $game['price']/100 : ''; ?>" required>
+            <input type="number" step="0.01" name="price" id="price" value="<?php echo isset($game) ? $game['price'] : ''; ?>" required>
         </p>
 
         <p>

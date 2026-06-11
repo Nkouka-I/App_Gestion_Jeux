@@ -65,7 +65,7 @@ class Game_model extends CI_Model {
 	    return $query->result_array();
 	}
 
-	public function get_game_id_dev_poster($id) {
+	public function get_game_info($id) {
 	    $sql = "SELECT g.*, d.name AS developer_name, p.jpeg AS game_image
 	    		FROM game g JOIN developer d ON g.developerId = d.id LEFT JOIN poster p ON p.id = g.posterId
 	    		WHERE g.id = ".$id;
@@ -82,7 +82,7 @@ class Game_model extends CI_Model {
 	    return $this->db->query($sql, array(
 	    	$data['name'],
 			$data['releaseYear'],
-			$data['price'],
+			$data['price']*100,
 			$data['metacritic'],
 			$data['developerId'],
 			$data['shortDescription'],
@@ -90,6 +90,14 @@ class Game_model extends CI_Model {
 			$data['linux'],
 			$data['mac'])
 		);
+		return $this->db->insert_id();
+	}
+
+	public function insert_poster($game_id, $poster_data)
+	{
+	    $sql = "INSERT INTO poster (id, jpeg) 
+	    		VALUES (?, ?)";
+	    return $this->db->query($sql, array($game_id, $poster_data));
 	}
 
 	public function update_game($id, $data) 
@@ -109,7 +117,7 @@ class Game_model extends CI_Model {
 	    return $this->db->query($sql, array(
 	        $data['name'],
 	        $data['releaseYear'],
-	        $data['price'],
+	        $data['price']*100,
 	        $data['metacritic'],
 	        $data['developerId'],
 	        $data['shortDescription'],
@@ -118,5 +126,19 @@ class Game_model extends CI_Model {
 	        $data['mac'],
 	        $id)
 		);
+	}
+
+	public function delete_game($id) {
+	    $sql = "DELETE FROM game WHERE id = ?";
+	    
+	    return $this->db->query($sql, array($id));
+	}
+
+	public function get_developers() {
+	    $sql = "SELECT * 
+	    		FROM developer 
+	    		ORDER BY name ASC";
+	    $query = $this->db->query($sql);
+	    return $query->result_array();
 	}
 }

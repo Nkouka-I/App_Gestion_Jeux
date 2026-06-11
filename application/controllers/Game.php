@@ -35,7 +35,7 @@ class Game extends CI_Controller {
     }
 
     public function detail($id) {
-        $data['game'] = $this->game_model->get_game_id_dev_poster($id);
+        $data['game'] = $this->game_model->get_game_info($id);
         
         if (empty($data['game'])) {
             show_404();
@@ -66,12 +66,21 @@ class Game extends CI_Controller {
                 'mac'              => $this->input->post('mac') ? 1 : 0
             );
 
-            $this->game_model->insert_game($game_data);
+            $new_game_id = $this->game_model->insert_game($game_data);
+            if (isset($_FILES['game_image']) && $_FILES['game_image']['error'] == UPLOAD_ERR_OK) {
+
+                $tmp_name = $_FILES['game_image']['tmp_name'];         
+
+                $binary_image = file_get_contents($tmp_name);
+                
+                $this->game_model->insert_poster($new_game_id, $binary_image);
+            }
             redirect('game/index');
         }
 
         $data['genres'] = $this->game_model->get_genres();
         $data['categories'] = $this->game_model->get_categories();
+        $data['developers'] = $this->game_model->get_developers();
         $this->load->view('game/form', $data);
     }
 
@@ -80,10 +89,11 @@ class Game extends CI_Controller {
             show_404();
         }
 
-        $data['game'] = $this->game_model->get_game_id_dev_poster($id);
+        $data['game'] = $this->game_model->get_game_info($id);
         if (empty($data['game'])) {
             show_404();
         }
+        $data['game']['price'] = $data['game']['price'] / 100;
 
         if ($this->input->post()) {
             $game_data = array(
@@ -104,6 +114,7 @@ class Game extends CI_Controller {
 
         $data['genres'] = $this->game_model->get_genres();
         $data['categories'] = $this->game_model->get_categories();
+        $data['developers'] = $this->game_model->get_developers();
         $this->load->view('game/form', $data);
     }
 }
