@@ -74,7 +74,8 @@ class Game_model extends CI_Model {
 	    return $query->row_array();
 	}
 
-	public function insert_game($data) {
+	public function insert_game($data) 
+	{
 	    $sql = "INSERT INTO game (name, releaseYear, price, metacritic, developerId, shortDescription, windows, linux, mac) 
 	            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	    
@@ -91,29 +92,31 @@ class Game_model extends CI_Model {
 		);
 	}
 
-	public function update_game($id, $data) {
-    $sql = "UPDATE game 
-            SET name = ?, 
-                releaseYear = ?, 
-                price = ?, 
-                metacritic = ?, 
-                developerId = ?, 
-                shortDescription = ?, 
-                windows = ?, 
-                linux = ?, 
-                mac = ? 
-            WHERE id = ?";
-            
-    return $this->db->query($sql, array(
-        $data['name'],
-        $data['releaseYear'],
-        $data['price'],
-        $data['metacritic'],
-        $data['developerId'],
-        $data['shortDescription'],
-        $data['windows'],
-        $data['linux'],
-        $data['mac'],
-        $id)
-	);
+	public function update_game($id, $data) 
+	{
+	    $sql = "UPDATE game 
+	            SET name = ?, 
+	                releaseYear = ?, 
+	                price = ?, 
+	                metacritic = ?, 
+	                developerId = ?, 
+	                shortDescription = ?, 
+	                windows = ?, 
+	                linux = ?, 
+	                mac = ? 
+	            WHERE id = ?";
+	            
+	    return $this->db->query($sql, array(
+	        $data['name'],
+	        $data['releaseYear'],
+	        $data['price'],
+	        $data['metacritic'],
+	        $data['developerId'],
+	        $data['shortDescription'],
+	        $data['windows'],
+	        $data['linux'],
+	        $data['mac'],
+	        $id)
+		);
+	}
 }

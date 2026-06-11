@@ -31,7 +31,7 @@ class Game extends CI_Controller {
         $data['current_sort'] = $sort_by;
         $data['current_order'] = $sort_order;
 
-        $this->load->view('game/test', $data);
+        $this->load->view('game/index', $data);
     }
 
     public function detail($id) {
@@ -49,7 +49,7 @@ class Game extends CI_Controller {
             show_404();
         }
         $this->game_model->delete_game($id);
-        redirect('game/test');
+        redirect('game/index');
     }
 
     public function add() {
