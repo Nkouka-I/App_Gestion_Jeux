@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Détails de <?php echo $game['name']; ?></title>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('css/style.css'); ?>">
 </head>
 <body>
 
@@ -24,6 +25,32 @@
     <?php endif; ?>
     
     <p><strong>Développeur :</strong> <?php echo $game['developer_name']; ?></p>
+
+    <p>
+        <strong>Genres :</strong>
+        <?php if (!empty($game_genres)): ?>
+            <?php foreach ($game_genres as $genre): ?>
+                <a href="<?php echo site_url('game/index?genre=' . $genre['id']); ?>">
+                    <?php echo $genre['description']; ?>
+                </a> | 
+            <?php endforeach; ?>
+        <?php else: ?>
+            <em>Aucun genre associé</em>
+        <?php endif; ?>
+    </p>
+
+    <p>
+        <strong>Catégories :</strong>
+        <?php if (!empty($game_categories)): ?>
+            <?php foreach ($game_categories as $category): ?>
+                <a href="<?php echo site_url('game/index?category=' . $category['id']); ?>">
+                    <?php echo $category['description']; ?>
+                </a> | 
+            <?php endforeach; ?>
+        <?php else: ?>
+            <em>Aucune catégorie associée</em>
+        <?php endif; ?>
+    </p>
 
     <p><strong>Description du jeu :</strong><?php echo $game['shortDescription']; ?></p>
 

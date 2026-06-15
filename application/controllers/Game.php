@@ -17,9 +17,9 @@ class Game extends CI_Controller {
         $category_id = $this->input->get('category');
 
         if (!empty($genre_id)) {
-            $data['games'] = $this->game_model->get_games_genre($genre_id);
+            $data['games'] = $this->game_model->get_games_genre_filter($genre_id);
         } elseif (!empty($category_id)) {
-            $data['games'] = $this->game_model->get_games_category($category_id);
+            $data['games'] = $this->game_model->get_games_category_filter($category_id);
         } else {
             $data['games'] = $this->game_model->get_games_filtered($search, $sort_by, $sort_order);
         }
@@ -41,6 +41,8 @@ class Game extends CI_Controller {
             show_404();
         }
 
+        $data['game_genres'] = $this->game_model->get_game_genres_details($id);
+        $data['game_categories'] = $this->game_model->get_game_categories_details($id);
         $this->load->view('game/details', $data);
     }
 
@@ -77,7 +79,8 @@ class Game extends CI_Controller {
             }
             redirect('game/index');
         }
-
+        $data['game_genres'] = array();
+        $data['game_categories'] = array();
         $data['genres'] = $this->game_model->get_genres();
         $data['categories'] = $this->game_model->get_categories();
         $data['developers'] = $this->game_model->get_developers();
@@ -112,6 +115,8 @@ class Game extends CI_Controller {
             redirect('game/index');
         }
 
+        $data['game_genres'] = $this->game_model->get_genre_of_a_game($id);
+        $data['game_categories'] = $this->game_model->get_category_of_a_game($id);
         $data['genres'] = $this->game_model->get_genres();
         $data['categories'] = $this->game_model->get_categories();
         $data['developers'] = $this->game_model->get_developers();

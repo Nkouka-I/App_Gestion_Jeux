@@ -2,12 +2,13 @@
 <html>
 <head>
     <title><?php echo isset($game) ? "Modifier" : "Ajouter"; ?> un jeu</title>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('css/style.css'); ?>">
 </head>
 <body>
 
     <h1><?php echo isset($game) ? "Modifier le jeu : " . $game['name'] : "Ajouter un nouveau jeu"; ?></h1>
 
-        <form action="<?php echo isset($game) ? site_url('game/edit/' . $game['id']) : site_url('game/add'); ?>" method="post" enctype="multipart/form-data">
+    <form action="<?php echo isset($game) ? site_url('game/edit/' . $game['id']) : site_url('game/add'); ?>" method="post" enctype="multipart/form-data">
 
         <?php if (!isset($game)): ?>
             <p>
@@ -15,8 +16,6 @@
                 <input type="file" name="game_image" id="game_image" accept="image/jpeg">
             </p>
         <?php endif; ?>
-
-        <button type="submit"><?php echo isset($game) ? "Enregistrer les modifications" : "Ajouter le jeu"; ?></button>
     </form>
 
     <form action="<?php echo isset($game) ? site_url('game/edit/' . $game['id']) : site_url('game/add'); ?>" method="post">
@@ -51,6 +50,28 @@
                     </option>
                 <?php endforeach; ?>
             </select>
+        </p>
+
+        <p>
+            <strong>Genres du jeu :</strong><br>
+            <?php foreach ($genres as $genre): ?>
+                <label>
+                    <input type="checkbox" name="genres[]" value="<?php echo $genre['id']; ?>" 
+                        <?php echo (in_array($genre['id'], $game_genres)) ? 'checked' : ''; ?>>
+                    <?php echo $genre['description']; ?>
+                </label><br>
+            <?php endforeach; ?>
+        </p>
+
+        <p>
+            <strong>Catégories du jeu :</strong><br>
+            <?php foreach ($categories as $category): ?>
+                <label>
+                    <input type="checkbox" name="categories[]" value="<?php echo $category['id']; ?>" 
+                        <?php echo (in_array($category['id'], $game_categories)) ? 'checked' : ''; ?>>
+                    <?php echo $category['description']; ?>
+                </label><br>
+            <?php endforeach; ?>
         </p>
 
         <p>

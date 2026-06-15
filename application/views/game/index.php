@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Liste des Jeux</title>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('css/style.css'); ?>">
 </head>
 <body>
 
@@ -41,21 +42,36 @@
         <?php endforeach; ?>
     </p>
 
-    <ul>
-        <?php foreach ($games as $game): ?>
-            <li>
-                <strong><a href="<?php echo site_url('game/detail/'.$game['id']); ?>"><?php echo $game['name']; ?></a></strong> 
-                (<?php echo $game['releaseYear']; ?>)          
-                
-                <span style="margin-left: 15px;">
-                    <a href="<?php echo site_url('game/edit/'.$game['id']); ?>">✏️</a>
-                    | 
-                    <a href="<?php echo site_url('game/delete/'.$game['id']); ?>" onclick="return confirm('Supprimer définitivement ce jeu ?');">❌</a>
-                </span>
-                <br>
-            </li>
-        <?php endforeach; ?>
-    </ul>
+    <table>
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Année</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($games as $game): ?>
+                <tr>
+                    <td>
+                        <strong>
+                            <a href="<?php echo site_url('game/detail/'.$game['id']); ?>">
+                                <?php echo $game['name']; ?>
+                            </a>
+                        </strong>
+                    </td>
+                    
+                    <td><?php echo $game['releaseYear']; ?></td>
+                    
+                    <td><?php echo $game['price']/100; ?> $</td>
+                    
+                    <td class="actions">
+                        <a href="<?php echo site_url('game/edit/'.$game['id']); ?>">✏️ Modifier</a>
+                        <a href="<?php echo site_url('game/delete/'.$game['id']); ?>" onclick="return confirm('Supprimer définitivement ce jeu ?');">❌ Supprimer</a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
 
 </body>
 </html>
