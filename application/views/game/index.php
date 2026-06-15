@@ -14,40 +14,60 @@
         </a>
     </p>
 
-    <form method="GET" action="<?php echo site_url('game/index'); ?>">
-        <input type="text" name="search" value="<?php echo $current_search; ?>" placeholder="Rechercher un jeu...">
-        <button type="submit">Rechercher</button>
-        <a href="<?php echo site_url('game/index'); ?>">Réinitialiser</a>
+    <form method="GET" action="<?php echo site_url('game/index'); ?>" class="filter-bar">
+    
+        <input type="text" name="search" placeholder="Rechercher un jeu..." value="<?php echo $current_search; ?>">
+
+        <select name="sort">
+            <option value="name" <?php echo ($current_sort == 'name') ? 'selected' : ''; ?>>Nom</option>
+            <option value="releaseYear" <?php echo ($current_sort == 'releaseYear') ? 'selected' : ''; ?>>Année de sortie</option>
+        </select>
+
+        <select name="order">
+            <option value="ASC" <?php echo ($current_order == 'ASC') ? 'select' : ''; ?>>Croissant (A-Z / 0-9)</option>
+            <option value="DESC" <?php echo ($current_order == 'DESC') ? 'select' : ''; ?>>Décroissant (Z-A / 9-0)</option>
+        </select>
+
+        <button type="submit">Filtrer</button>
+        
+        <a href="<?php echo site_url('game/index'); ?>" class="btn-clear">Réinitialiser</a>
     </form>
+
     <br>
-    <p>
-        Trier par : 
-        <a href="<?php echo site_url('game/index?sort=name&order=ASC&search='.$current_search); ?>">Nom (A-Z)</a> | 
-        <a href="<?php echo site_url('game/index?sort=releaseYear&order=DESC&search='.$current_search); ?>">Année</a> 
-    </p>
-    <p>
-        <strong>Filtrer par Genre :</strong>
-        <?php foreach ($genres as $genre): ?>
-            <a href="<?php echo site_url('game/index?genre='.$genre['id']); ?>">
-                <?php echo $genre['description']; ?>
-            </a> | 
-        <?php endforeach; ?>
-    </p>
-    <p>
-        <strong>Filtrer par Catégorie :</strong>
-        <?php foreach ($categories as $category): ?>
-            <a href="<?php echo site_url('game/index?category=' . $category['id']); ?>">
-                <?php echo $category['description']; ?> 
-            </a> | 
-        <?php endforeach; ?>
-    </p>
+
+    <form method="GET" action="<?php echo site_url('game/index'); ?>">
+        <input type="hidden" name="search" value="<?php echo $current_search; ?>">
+        
+        <label for="category_select"><strong>Filtrer par Catégorie :</strong></label>
+        <select name="category" id="category_select" onchange="this.form.submit()">
+            <option value="">--  --</option>
+            <?php foreach ($categories as $categorie): ?>
+                <option value="<?php echo $categorie['id']; ?>" <?php echo ($this->input->get('category') == $categorie['id']) ? 'selected' : ''; ?>>
+                    <?php echo $categorie['description']; ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+    </form>
+    
+    <form method="GET" action="<?php echo site_url('game/index'); ?>">
+        <input type="hidden" name="search" value="<?php echo $current_search; ?>">
+        
+        <label for="genre_select"><strong>Filtrer par Genre :</strong></label>
+        <select name="genre" id="genre_select" onchange="this.form.submit()">
+            <option value="">--  --</option>
+            <?php foreach ($genres as $genre): ?>
+                <option value="<?php echo $genre['id']; ?>" <?php echo ($this->input->get('genre') == $genre['id']) ? 'selected' : ''; ?>>
+                    <?php echo $genre['description']; ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+    </form>
 
     <table>
         <thead>
             <tr>
                 <th>Titre</th>
                 <th>Année</th>
-                <th>Prix</th>
             </tr>
         </thead>
         <tbody>

@@ -52,7 +52,7 @@
         <?php endif; ?>
     </p>
 
-    <p><strong>Description du jeu :</strong><?php echo $game['shortDescription']; ?></p>
+    <p><strong>Description :</strong><?php echo $game['shortDescription']; ?></p>
 
     <p><strong>Compatibilité :</strong></p>
     <ul>
