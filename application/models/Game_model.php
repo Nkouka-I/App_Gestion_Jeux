@@ -169,4 +169,30 @@ class Game_model extends CI_Model {
 	    $query = $this->db->query($sql);
 	    return $query->result_array();
 	}
+
+	public function update_game_genres($game_id, $genre_ids) 
+	{
+	    $sql_delete = "DELETE FROM game_genre WHERE gameId = ?";
+	    $this->db->query($sql_delete, array($game_id));
+
+	    if (!empty($genre_ids) && is_array($genre_ids)) {
+	        foreach ($genre_ids as $genre_id) {
+	            $sql_insert = "INSERT INTO game_genre (gameId, genreId) VALUES (?, ?)";
+	            $this->db->query($sql_insert, array($game_id, $genre_id));
+	        }
+	    }
+	}
+
+	public function update_game_categories($game_id, $category_ids) 
+	{
+	    $sql_delete = "DELETE FROM game_category WHERE gameId = ?";
+	    $this->db->query($sql_delete, array($game_id));
+
+	    if (!empty($category_ids) && is_array($category_ids)) {
+	        foreach ($category_ids as $category_id) {
+	            $sql_insert = "INSERT INTO game_category (gameId, categoryId) VALUES (?, ?)";
+	            $this->db->query($sql_insert, array($game_id, $category_id));
+	        }
+	    }
+	}
 }

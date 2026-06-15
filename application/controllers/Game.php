@@ -77,6 +77,10 @@ class Game extends CI_Controller {
                 
                 $this->game_model->insert_poster($new_game_id, $binary_image);
             }
+            $new_game_id = $this->game_model->insert_game($game_data);
+
+            $this->game_model->update_game_genres($new_game_id, $this->input->post('genres'));
+            $this->game_model->update_game_categories($new_game_id, $this->input->post('categories'));
             redirect('game/index');
         }
         $data['game_genres'] = array();
@@ -112,6 +116,8 @@ class Game extends CI_Controller {
             );
 
             $this->game_model->update_game($id, $game_data);
+            $this->game_model->update_game_genres($id, $this->input->post('genres'));
+            $this->game_model->update_game_categories($id, $this->input->post('categories'));
             redirect('game/index');
         }
 

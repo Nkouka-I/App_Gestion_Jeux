@@ -47,6 +47,7 @@
             <tr>
                 <th>Titre</th>
                 <th>Année</th>
+                <th>Prix</th>
             </tr>
         </thead>
         <tbody>
@@ -61,8 +62,6 @@
                     </td>
                     
                     <td><?php echo $game['releaseYear']; ?></td>
-                    
-                    <td><?php echo $game['price']/100; ?> $</td>
                     
                     <td class="actions">
                         <a href="<?php echo site_url('game/edit/'.$game['id']); ?>">✏️ Modifier</a>
