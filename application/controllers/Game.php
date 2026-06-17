@@ -68,7 +68,6 @@ class Game extends CI_Controller {
                 'mac'              => $this->input->post('mac') ? 1 : 0
             );
 
-            $new_game_id = $this->game_model->insert_game($game_data);
             if (isset($_FILES['game_image']) && $_FILES['game_image']['error'] == UPLOAD_ERR_OK) {
 
                 $tmp_name = $_FILES['game_image']['tmp_name'];         
